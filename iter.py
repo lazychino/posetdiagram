@@ -12,7 +12,7 @@ def k_subset(arr, k):
 
 partitions = []
 
-n = 6
+n = 7
 t1 = datetime.today()
 for i in range(1,n+1):
     print i
