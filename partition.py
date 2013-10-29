@@ -17,53 +17,17 @@ def genPowerSet(n):
 	
 	return powerset
 
-def genPartitions(n, powerSet, tab="", partitions=[]):
-	if n < 1:
-		return powerset[1]
-	else:
-		print tab + "n =", n
-		
-		for i in range(1, n/2+1):
-			#~ print tab,"i:", i
-			print genPartitions(i, powerSet, tab + "  ")
-			print [p for p in genPartitions(n-i, powerSet, tab + "  ")]
-			for p1 in powerset[i]:
-				for p2 in powerset[n-i]:
-					#~ print "p1 %s | p2 %s" % (p1, p2)
-					if p1.isdisjoint(p2):
-						#~ print "acpt p1 %s | p2 %s" % (p1, p2)
-						if [p1, p2] not in partitions and [p2, p1] not in partitions:
-							partitions.append([p1,p2])
-		print partitions
-		return partitions
-
-#~ partitions = genPartitions(n, powerset)
-
-#for i in range(len(powerset)/2+1):
-#	print i
-#	print (len(powerset)-1)-i
-#	for p1 in powerset[i]:
-#			for p2 in powerset[(len(powerset)-1)-i]:
-#				#~ print "p1 %s | p2 %s" % (p1, p2)
-#				if p1.isdisjoint(p2):
-#					#~ print "p1 %s | p2 %s" % (p1, p2)
-#					if [p1, p2] not in partitions and [p2, p1] not in partitions:
-#						partitions.append([p1,p2])
-
 def numOfElements(L):
 	cardinality = 0
 	for s in L:
 		cardinality += len(s)
 	return cardinality
 		
-def version1(n, powerSet):
-	#powerSet.pop(n)
-	#powerSet.pop(0)
+def setPartitions(n, powerSet):
 	partitions = []
-	
 	for i in range(1, n/2+1):
 		#~ print "i: %s" % (powerSet[i])
-		for k in range(2,len(powerSet)-i):
+		for k in range(i,len(powerSet)-i):
 			#~ print "k: %s" % (powerSet[k])
 			currentPartitions = []
 			print "i:", i, "k:", k
@@ -72,77 +36,44 @@ def version1(n, powerSet):
 					#~ print "p1 %s | p2 %s" % (p1, p2)
 					if p1.isdisjoint(p2):
 						#~ print "p1 %s | p2 %s" % (p1, p2)
-						if [p1, p2] not in partitions and [p2, p1] not in partitions:
+						if [p1, p2] not in currentPartitions and [p2, p1] not in currentPartitions:
+							#~ print "added"
 							currentPartitions.append([p1,p2])
+			#~ print currentPartitions
 			if n-(k+i) > 0:
 				for x in range(1,(n-(k+i))+1):
 					current = copy.deepcopy(currentPartitions)
-					print "current:", current
+					#~ print "current:"
 
-					#~ for y in range(((n-(k+i))+1)-x):
-					print "x:", x#, "y:", y
 					for p in current:
 						skip = False
-						print p
+						#~ print p
 						for st in powerSet[x]:
 							disjoint = True
-							print " ", p
+							#~ print " ", st
 							if not all(st.isdisjoint(s) for s in p):
 								disjoint = False
 							
 							if disjoint:
+								#~ print "  appened"
 								p.append(st)
 							
 							if numOfElements(p) == n:
-								print "  ", p
-								partitions.append(p)
+								#~ print "  accepted"
+								if all(list(i) not in partitions for i in list(itertools.permutations(p,len(p)))):
+									partitions.append(p)
 								skip = True
 								break
-							#~ if skip:
-								#~ break
 			else:
 				partitions += currentPartitions
 
-	#~ print "p1"
-	#~ for p in partitions:
-		#~ print p
-	#~ print "end"
-	#~ print len(partitions)
-	'''
-	c = 0
-	tmp = list()
-	for p in partitions:
-		cardinality = numOfElements(p)
-		
-		if cardinality < n:
-			for i in range(1,n-cardinality+1):
-				for c1 in powerSet[i]:
-					disjoint = True
-					for s in p:
-						#~ print c1.isdisjoint(s)
-						if not c1.isdisjoint(s):
-							disjoint = False
-							
-					if disjoint:
-						p.append(c1)
-						
-					if numOfElements(p) == n:
-						#~ print p
-						c += 1
-						tmp.append(p)
-		else:
-			c+=1
-			tmp.append(p)
-			#~ print p
+	partitions.append([set(range(n))])
+	
+	return partitions
 
-	#~ print "count", c, len(partitions)
-	#~ for t in tmp:
-			#~ print t
-	#~ print len(tmp)
-	'''
-	tmp = partitions
 
-## filter duplicates
+def filterDuplicates(tmp):
+	## filter duplicates
 	i = 0
 	sizeof = len(tmp)
 	while i < sizeof:
@@ -177,15 +108,7 @@ def version1(n, powerSet):
 			#~ print t
 	#~ print len(tmp)
 	
-	partitions = tmp
-	
-	tmp = list()
-	for i in range(n):
-		tmp.append(set([i]))
-	partitions.append(tmp)
-	partitions.append([set(range(n))])
-	
-	return partitions
+	return tmp
 
 
 #-----------------------------------------------------------------------
@@ -198,11 +121,20 @@ powerset = genPowerSet(n)
 
 #~ print powerset
 
-partitions = version1(n, powerset)
-
-for p in partitions:
-	print p
+partitions = setPartitions(n, powerset)
 print len(partitions)
+#~ partitions = filterDuplicates(partitions)  # not needed
+
+partsize = []
+partqty = []
+for p in partitions:
+	sz = list(len(s) for s in p)
+	partqty.append(sz)
+	if sz not in partsize:
+		partsize.append(sz)
+
+for par in partsize:
+	print par, partqty.count(par)
 
 
 
