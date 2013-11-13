@@ -111,6 +111,7 @@ def filterDuplicates(tmp):
 	return tmp
 
 
+
 #-----------------------------------------------------------------------
 
 #powerset.pop(n)
@@ -133,12 +134,34 @@ for p in partitions:
 	if sz not in partsize:
 		partsize.append(sz)
 
-for par in partsize:
-	print par, partqty.count(par)
 
+partition = partitions
 
+#for par in partsize:
+#	print par, partqty.count(par)
 
+orderedpartitions = []
+for i in range(n+1):
+	orderedpartitions.append([])
 
+for p in partition:
+	m = 0
+	for s in p:
+		lens = len(s)
+		if lens > m:
+			m = lens
+			mi = p.index(s)
+	orderedpartitions[m].append(p)
+
+for i in orderedpartitions:
+	print i
+
+for index in range(1,n):
+	for i in orderedpartitions[index]:
+		for j in orderedpartitions[index+1]:
+			for k in :
+			if i <= j:
+			
 
 
 
