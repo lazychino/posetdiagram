@@ -21,11 +21,11 @@ def genCombinationOfSizeN(S, n):
 
 def SetPartitions(S):
     s = len(S)
-    # elements of cardinality 1
+    # generate elements of cardinality 1
     combi = list()
     combi.append([frozenset([frozenset([x])]) for x in S])
     
-     # elements of cardinality 2
+     # generate elements of cardinality 2
     combi.append([frozenset(x) for x in list(combinations([frozenset([x]) for x in S],2))])
     combi[1] += [frozenset([frozenset(x)]) for x in list(combinations(S,2))]
         
