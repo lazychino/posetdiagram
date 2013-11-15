@@ -1,0 +1,184 @@
+{
+  "name": "abcd",
+  "children": [
+    {
+      "name": "abc|d",
+      "children": [
+        {
+          "name": "ab|c|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "ac|b|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "bc|a|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "abd|c",
+      "children": [
+        {
+          "name": "ab|c|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "ad|b|c",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "bd|a|c",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "acd|b",
+      "children": [
+        {
+          "name": "ac|b|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "ad|b|c",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "cd|b|a",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bcd|a",
+      "children": [
+        {
+          "name": "bc|a|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "bd|a|c",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "cd|b|a",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cd|ab",
+      "children": [
+        {
+          "name": "ab|c|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "cd|b|a",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ac|bd",
+      "children": [
+        {
+          "name": "ac|b|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "bd|a|c",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bc|ad",
+      "children": [
+        {
+          "name": "ad|b|c",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        },
+        {
+          "name": "bc|a|d",
+          "children": [
+            {
+              "name": "a|b|c|d"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
