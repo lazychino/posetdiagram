@@ -1,0 +1,69 @@
+li {line-height: 28px;}
+#usr_inp{
+	margin-left: 1em;
+	padding:10px;
+	margin:1.5em 1em 0 2em;
+}
+#ac_number{margin-bottom: 0px}
+h5 {font-family: verdana,georgia,sans-serif,arial;}
+#line{
+	height: .2em;
+	background-color: #2773FF;
+}
+#nav-bar {
+	height: 3.5em;
+	background-color: #DDDDDD;
+	border-bottom: #000000 solid .5px;
+}
+.nav-pills > li > a{
+	margin-top: -1px;
+}
+#container> ul{
+	font-family: arial,sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+}
+#container * {padding:7px;display:inline-block;}
+
+#container > ul>:first-child {
+	font-style: oblique;
+	color: #0075B4;
+}
+
+#devteam{
+	font-style: oblique;
+	color: #0075B4;
+	font-family: arial,sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+}
+.navfix{margin-bottom: .2em;}
+#team {
+	color: #0088cc;
+	list-style: none;
+	margin-top: .5em;
+}
+#teamdiv{
+	margin:	1.5em 0 0 1.5em;
+}
+a:link {
+	text-decoration:none;
+}
+
+#about{
+	font-family: arial,verdana,georgia,sans-serif;
+	font-size: 18px;
+	margin: 1.5em 0 0 1.5em;
+}
+#about * {
+	display:inline;
+}
+#about > span{
+	display: inline;
+	font-weight: bold;
+
+}
+
+#fixedmargin{
+	margin: 2em 0 .5em 0;
+}
