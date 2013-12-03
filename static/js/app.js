@@ -4,12 +4,11 @@ window.onload = function(){
 
 $( document ).ready(function() {
 
- });
-
-function getjson(number){
+	function getjson(number){
 	if (isNaN(number)) return false;
-	else console.log('correct')
 	$.get("/antichain/"+number, function( data ) {
   		return data;
 	});
 }
+ });
+
