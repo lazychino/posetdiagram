@@ -1,38 +1,28 @@
-<!--
-   index.html
-   
-   Copyright 2013 CHINO <chino@arbi-electronic>
-   
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-   
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-   
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-   MA 02110-1301, USA.
-   
-   
--->
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
-<head>
-	<title>TEST</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<meta name="generator" content="Geany 1.23.1" />
-</head>
-
-<body>
-	<h1>TEST!</h1>
-</body>
-
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Diagram Generator</title>
+		<link rel="stylesheet" type="text/css" href="/home/jay/webpage aplicada/assets/css/bootstrap/css/bootstrap.css">
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/JavaScript" src="/home/jay/webpage aplicada/assets/js/app.js"></script>
+		<link rel="stylesheet" type="text/css" href="/home/jay/webpage aplicada/assets/css/style.css">
+	</head>
+	<body>
+		<div id = 'line'></div>
+		<div id = 'nav-bar'>
+			<div id = 'container'>
+				<ul class = 'nav nav-pills'>
+					<li>DIAGRAM OF POSET GENERATOR</li>
+					<li class = 'navfix'><a href ="/home/jay/webpage aplicada/home.html">App</a></li>
+					<li class = 'navfix'><a href ="/home/jay/webpage aplicada/assets/html/team.html">Team</a></li>
+					<li class = 'navfix'><a href ="/home/jay/webpage aplicada/assets/html/about.html">About</a></li>
+			</div>
+		</div>
+		<form onsubmit = 'return getjson(document.getElementById("ac_number").value)'>
+			<div id = 'usr_inp'>
+				<input id= 'ac_number' class = 'input-medium' type = 'text' placeholder = 'Antichain number'>
+				<input id= 'submit' type = 'submit' value = 'Generate'>
+			</div>
+	</body>
 </html>
