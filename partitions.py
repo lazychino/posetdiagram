@@ -41,16 +41,19 @@ def SetPartitions(S):
     
     return combi[s-1]
 
-#--------------testing code-------------------------------- 
-#~ n = input('enter n:')
-#~ 
-#~ t1 = datetime.datetime.today()
-#~ parts = SetPartitions(range(n))
-#~ t2 = datetime.datetime.today()
-#~ 
-#~ 
-#~ print parts
-#~ print 'total time', t2-t1
-#~ print 'combi[%d] size=%d' % (n, len(parts))
+
+if __name__ == "__main__":
+#--------------testing code--------------------------------
+    print "Set partitions genarator"
+    s = input("enter set(list or string): ")
+    print "Set =", s
+    t1 = datetime.datetime.today()
+    parts = SetPartitions(s)
+    t2 = datetime.datetime.today()
+
+
+    print parts
+    print 'total time', t2-t1
+    print 'Set%s have %d partitions' % (list(s), len(parts))
 
     
