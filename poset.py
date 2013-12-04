@@ -2,6 +2,9 @@ import partitions
 import json
 
 def orderSet(a, b):
+    if( len(a) == 1 and len(b) == 1):
+        return list(b)[0] - list(a)[0]
+        
     return len(a) - len(b)
 
 def partiToString(S):  
@@ -63,16 +66,15 @@ def toJSONTree(P, parent):
 def getDiagramPosetOf(S):
     ''' takes a antichain set and return the poset for all posible equivalent diagrams '''
     parts = partitions.SetPartitions(S)
-    poset = getRelations(parts, len(S))
-    return toJSON(poset, poset['root'])
+    return json.JSONEncoder().encode(getRelations(parts, len(S)))
+    
  
 
 if __name__ == "__main__":
 #---------testing code ----------------------
     print "Antichain poset of diagram genarator"
     antichain = input("enter antichain size:")
-    parts = partitions.SetPartitions(range(antichain))
-    poset = json.JSONEncoder().encode(getRelations(parts, antichain))
+    poset = getDiagramPosetOf(range(antichain))
     print poset
     f = open("poset.json", 'w')
     f.write(poset)

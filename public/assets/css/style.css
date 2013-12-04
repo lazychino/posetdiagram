@@ -67,3 +67,16 @@ a:link {
 #fixedmargin{
 	margin: 2em 0 .5em 0;
 }
+
+.link {
+  stroke: #aaa;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+
+.diagram {
+    fill: blue;
+}
