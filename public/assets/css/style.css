@@ -80,3 +80,8 @@ a:link {
 .diagram {
     fill: blue;
 }
+
+.loading {
+	width: 200px;
+	height:200px;
+}
