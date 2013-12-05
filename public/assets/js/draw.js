@@ -10,7 +10,7 @@ var drawPoset = function(json, n) {
             {
                 //~ console.log(i,j);
                 num = parseInt(str[i][j]);
-                node.append("svg:circle")
+                node.append("circle")
                     .style("fill", "white")
                     .attr("r", 0.4)
                     .attr("cx", num - n/2)
@@ -67,11 +67,11 @@ var drawPoset = function(json, n) {
         .text(function(d) {
             return d.name
         });
-
+    
     svg.selectAll("g").each(function(d, i) {
         drawDiagram(d3.select(this), d.name);
         var transform = d3.select(this).attr("transform");
-
+        
         var tmp = transform.split(/\(|\)/);
         coord = tmp[1].split(",");
         //~ console.log(tmp);
@@ -82,26 +82,28 @@ var drawPoset = function(json, n) {
         json.nodes[pos].x = coord[0];
         json.nodes[pos].y = coord[1];
     });
-
+    
     svg.selectAll("g").on("click", function(d) {
         this.parentNode.appendChild(this);
-        d3.select(this)
-            .attr("big", "true")
-            .style("pointer-events", "none")
-            .transition()
-            .duration(750)
-            .attr("transform", "translate("+ window.innerWidth/2 +","+ window.innerHeight/3 +")scale(23)")
-            .transition()
-            .delay(10000)
-            .duration(400)
-            .attr("transform", function(d) {
-                return "translate(" + json.nodes[json.nodes.indexOf(d)].x + "," + json.nodes[json.nodes.indexOf(d)].y + ")";
-            });
+        var dia = d3.select(this)
+        if(!dia.attr("big")) {
+            dia.attr("big", "set")
+                .transition()
+                .duration(750)
+                .attr("transform", "translate("+ window.innerWidth/2 +","+ window.innerHeight/3 +")scale(23)");
+        }
+        else {
+            dia.attr("big", null)
+                .transition()
+                .duration(400)
+                .attr("transform", function(d) {
+                    return "translate(" + json.nodes[json.nodes.indexOf(d)].x + "," + json.nodes[json.nodes.indexOf(d)].y + ")";
+                });
+        }
     });
-
+    
     link.attr("x1", function(d) { return json.nodes[d.source].x; })
         .attr("y1", function(d) { return json.nodes[d.source].y; })
         .attr("x2", function(d) { return json.nodes[d.target].x; })
         .attr("y2", function(d) { return json.nodes[d.target].y; });
-
 };
