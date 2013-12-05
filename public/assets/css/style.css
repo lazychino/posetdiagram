@@ -82,6 +82,15 @@ a:link {
 }
 
 .loading {
+	position:relative;
+	top:50px;
+	left:100px;
 	width: 200px;
 	height:200px;
+}
+
+
+.overlay {
+  fill: none;
+  pointer-events: all;
 }
