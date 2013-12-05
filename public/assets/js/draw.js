@@ -19,6 +19,10 @@ var drawPoset = function(json, n) {
         }
     };
     
+    var zoom = function() {
+      svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    };
+    
     var levels = [];
     var nodesPerLevel = [];
     for (var i in json.nodes) {
@@ -30,16 +34,23 @@ var drawPoset = function(json, n) {
     
     var maxLevel = Math.max.apply(null, levels);
 
-    //~ var width = window.innerWidth-15,
     var width = Math.max(window.innerWidth-15, maxLevel*50+50),
-        height = n*100+100;
+        height = n*(width*0.5625)/(n+1)+100;
 
-    console.log(json);
+    //~ console.log(json);
 
     var svg = d3.select("#poset").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", window.innerWidth-15)
+        .attr("height", window.innerHeight-150)
+        .append("g")
+        .call(d3.behavior.zoom().scaleExtent([-1, 5]).on("zoom", zoom))
+        .append("g");
 
+    svg.append("rect")
+        .attr("class", "overlay")
+        .attr("width", maxLevel*50+50)
+        .attr("height", height);
+    
     var link = svg.selectAll(".link")
         .data(json.links)
         .enter().append("line")
@@ -54,7 +65,7 @@ var drawPoset = function(json, n) {
             .enter().append("g")
             .attr("class", "node")
             .attr("transform", function(d, i) {
-                return "translate(" + (((maxLevel*50+50)/(levels[d.level] + 1)* ++i)) + "," + ((((levels.length - 1) - d.level) * 100) + 50) + ")";
+                return "translate(" + (((maxLevel*50+50)/(levels[d.level] + 1)* ++i)) + "," + ((((levels.length - 1) - d.level) * (width*0.5625)/(n+1)) + 50) + ")";
             })
             .append("circle")
             .attr("class", "node")
