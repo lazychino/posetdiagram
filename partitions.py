@@ -5,7 +5,7 @@ from threading import Thread
 rtn = [] # global list for use as a stack for the thread
 
 def distintJoin(P, P2, join):
-    ''' makes a disjoint join of partion '''
+    ''' makes a disjoint join of sets '''
     for p in P:        
         for p2 in P2:
             if all(x.isdisjoint(y) for x in p2 for y in p):
