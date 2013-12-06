@@ -7,7 +7,7 @@ $(document).ready(function() {
 			$('#ac_number').focus();
 			$('#generate').on('click', function() {
 				var number = Number($('#ac_number').val());
-				if(isNaN(number)) 
+				if(isNaN(number) || number < 2) 
 					return;
 				if(number > 6) {
 					$('#poset').empty().append("sorry for limit with memory on host this can not be generated<br>\nto run n&ge;7 download from repository and run locally on your pc");
