@@ -7,7 +7,7 @@ $(document).ready(function() {
 			$('#ac_number').focus();
 			$('#generate').on('click', function() {
 				var number = Number($('#ac_number').val());
-				if(isNaN(number)) 
+				if(isNaN(number) || number < 2) 
 					return;
 				$('#poset').empty().append('<img class="loading" src="/assets/loading.gif" alt="loading">');
 				$.get("/antichain/"+number, function( data ) {
