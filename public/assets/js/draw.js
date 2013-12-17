@@ -1,3 +1,27 @@
+var countLevels =  function(json) {
+    var levels = [];
+    var nodesPerLevel = [];
+    for (var i in json.nodes) {
+        levels[json.nodes[i].level] = levels[json.nodes[i].level] ? (levels[json.nodes[i].level] + 1) : 1;
+        if (nodesPerLevel[json.nodes[i].level] === undefined)
+            nodesPerLevel[json.nodes[i].level] = [];
+        nodesPerLevel[json.nodes[i].level].push(json.nodes[i]);
+    }
+    return levels;
+};
+
+
+var nodeGrades = function(json) {
+    for(var i in json.nodes) {
+        for(var k in json.links){
+            if(json.links[k].source == i)
+                json.nodes[i].grade = json.nodes[i].grade ? ++json.nodes[i].grade : 1;
+        }
+    }
+    return json;
+};
+
+
 var drawPoset = function(json, n) {
 
     json = JSON.parse(json);

@@ -89,6 +89,10 @@ a:link {
 	height:200px;
 }
 
+#stats  {
+	float:right;
+	margin-right:5em;
+}
 
 .overlay {
   fill: none;
