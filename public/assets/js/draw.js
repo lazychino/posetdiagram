@@ -1,28 +1,24 @@
-var countLevels =  function(json) {
-    var levels = [];
-    var nodesPerLevel = [];
-    for (var i in json.nodes) {
-        levels[json.nodes[i].level] = levels[json.nodes[i].level] ? (levels[json.nodes[i].level] + 1) : 1;
-        if (nodesPerLevel[json.nodes[i].level] === undefined)
-            nodesPerLevel[json.nodes[i].level] = [];
-        nodesPerLevel[json.nodes[i].level].push(json.nodes[i]);
-    }
-    return levels;
-};
-
+var template = '<div><p id="info"></p>\n<span>Nodes per level:</span><br>\n<ul id="nodeslevel"></ul>\n</div><div id="diagram"></div>';
 
 var nodeGrades = function(json) {
+    json.linksPerLevel = []
     for(var i in json.nodes) {
+        json.nodes[i].grade = 0;
         for(var k in json.links){
             if(json.links[k].source == i)
-                json.nodes[i].grade = json.nodes[i].grade ? ++json.nodes[i].grade : 1;
+                json.nodes[i].grade++;
         }
+        if(json.linksPerLevel[json.nodes[i].level] === undefined)
+            json.linksPerLevel[json.nodes[i].level] = 0;
+        json.linksPerLevel[json.nodes[i].level] += json.nodes[i].grade;
     }
     return json;
 };
 
 
 var drawPoset = function(json, n) {
+    
+    d3.select("#poset").html(template);
 
     json = JSON.parse(json);
     
@@ -55,7 +51,39 @@ var drawPoset = function(json, n) {
             nodesPerLevel[json.nodes[i].level] = [];
         nodesPerLevel[json.nodes[i].level].push(json.nodes[i]);
     }
+
+// ---- output info ------------------------------------------------------
     
+    json = nodeGrades(json); // add grade attr to all nodes and calculate linksPerLevel
+    var number_word = ['one','two','three','four','five','six','seven','eight'];
+    
+    var grades = [];
+    for (var j in json.nodes){
+        if (grades[json.nodes[j].level] === undefined)
+            grades[json.nodes[j].level] = [];
+        if (grades[json.nodes[j].level].indexOf(json.nodes[j].grade) == -1)
+            grades[json.nodes[j].level].push(json.nodes[j].grade ? json.nodes[j].grade : 0);
+    }
+    
+    d3.select("#info").text("The Poset of diagram for the antichain of " + n + " have " + json.nodes.length + " nodes")
+    
+    var info = d3.select("#nodeslevel");
+    levels.reverse();
+    grades.reverse();
+    json.linksPerLevel.reverse();
+    
+    info.selectAll('li').data(levels)
+        .enter().append("li")
+        .text(function(d, i) { 
+            var word = (levels[i] == 1) ? 'node' : 'nodes';
+            var childList = grades[i].sort(function(a,b){ return a > b; }).join(", ");
+            return "Level " + number_word[i] + " has " + d + " " + word + " with " + childList + " children. There's "
+            + json.linksPerLevel[i] + " connections to the next level";
+        });
+        
+    levels.reverse();
+
+//---------- draw svg ----------------------------------------------
     var maxLevel = Math.max.apply(null, levels);
 
     var width = Math.max(window.innerWidth-15, maxLevel*50+50),
@@ -63,7 +91,7 @@ var drawPoset = function(json, n) {
 
     //~ console.log(json);
 
-    var svg = d3.select("#poset").append("svg")
+    var svg = d3.select("#diagram").append("svg")
         .attr("width", window.innerWidth-15)
         .attr("height", window.innerHeight-150)
         .append("g")
